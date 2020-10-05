@@ -4,12 +4,12 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  PrimaryColumn
-} from 'typeorm';
-import { uuid } from 'uuidv4';
-import { Organization } from './Organization';
+  PrimaryColumn,
+} from "typeorm";
+import { v4 } from "uuid";
+import { Organization } from "./Organization";
 
-@Entity('users')
+@Entity("users")
 export class User {
   @PrimaryColumn()
   public readonly id?: string;
@@ -27,7 +27,7 @@ export class User {
   public org_id?: string;
 
   @ManyToOne(() => Organization)
-  @JoinColumn({ name: 'org_id' })
+  @JoinColumn({ name: "org_id" })
   public organization?: Organization;
 
   @Column()
@@ -39,11 +39,13 @@ export class User {
   @CreateDateColumn()
   public updated_at?: Date;
 
-  constructor(props: Omit<User, 'id'>, id?: string) {
+  constructor(props: Omit<User, "id">, id?: string) {
     Object.assign(this, props);
 
     if (!id) {
-      this.id = uuid();
+      this.id = v4();
+      this.status = "PENDENTE";
+      this.created_at = new Date();
     }
   }
 }

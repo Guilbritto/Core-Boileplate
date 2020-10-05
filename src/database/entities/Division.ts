@@ -6,7 +6,7 @@ import {
   ManyToOne,
   PrimaryColumn
 } from 'typeorm';
-import { uuid } from 'uuidv4';
+import { v4 } from 'uuid';
 import { Company } from './Company';
 
 @Entity('divisions')
@@ -37,7 +37,7 @@ export class Division {
     Object.assign(this, props);
 
     if (!id) {
-      this.id = uuid();
+      this.id = v4();
     }
   }
 }
