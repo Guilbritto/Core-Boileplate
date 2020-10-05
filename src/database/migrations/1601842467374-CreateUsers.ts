@@ -39,6 +39,16 @@ export class CreateUsers1601842467374 implements MigrationInterface {
             name: 'div_id',
             type: 'varchar',
             isNullable: true
+          },
+          {
+            name: 'created_at',
+            type: 'timestamp with time zone',
+            isNullable: true
+          },
+          {
+            name: 'updated_at',
+            type: 'timestamp with time zone',
+            isNullable: true
           }
         ]
       })
@@ -73,9 +83,26 @@ export class CreateUsers1601842467374 implements MigrationInterface {
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    await queryRunner.dropForeignKey('users', 'div_id');
-    await queryRunner.dropForeignKey('users', 'comp_id');
-    await queryRunner.dropForeignKey('users', 'org_id');
+    const usersTable = await queryRunner.getTable('users');
+
+    const fkDivID = usersTable?.foreignKeys.find(
+      (fk) => fk.columnNames.indexOf('div_id') !== -1
+    );
+    const fkCompID = usersTable?.foreignKeys.find(
+      (fk) => fk.columnNames.indexOf('comp_id') !== -1
+    );
+    const fkOrgId = usersTable?.foreignKeys.find(
+      (fk) => fk.columnNames.indexOf('org_id') !== -1
+    );
+    if (fkDivID) {
+      await queryRunner.dropForeignKey('users', fkDivID);
+    }
+    if (fkCompID) {
+      await queryRunner.dropForeignKey('users', fkCompID);
+    }
+    if (fkOrgId) {
+      await queryRunner.dropForeignKey('users', fkOrgId);
+    }
     await queryRunner.dropTable('users');
   }
 }
