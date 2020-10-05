@@ -15,10 +15,13 @@ export class UserController {
   }
 
   async createUser(request: Request<IUserRequestDTO>, response: Response) {
-    const repository = getCustomRepository(UserRepository);
-    const userUseCase = new UserUseCase(repository, this.mailProvider);
-    userUseCase.execute(request.body);
-
-    return response.status(201).send();
+    try {
+      const repository = getCustomRepository(UserRepository);
+      const userUseCase = new UserUseCase(repository, this.mailProvider);
+      userUseCase.execute(request.body);
+      return response.status(201).send();
+    } catch (err) {
+      response.status(400).json({ message: err.message });
+    }
   }
 }
