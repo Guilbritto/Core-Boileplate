@@ -12,6 +12,7 @@ export class LoginController {
   ) {
     try {
       const user = await this.loginUseCase.execute(request.body);
+      delete user.user.password;
       return response.status(200).json(user);
     } catch (err) {
       response.status(400).json({ message: err.message });

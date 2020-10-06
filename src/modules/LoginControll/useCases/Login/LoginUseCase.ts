@@ -16,7 +16,7 @@ export class LoginUseCase {
       throw new Error('Email or password does`t match');
     }
 
-    const matchedPassword = compare(user.password, data.password);
+    const matchedPassword = await compare(data.password, user.password);
 
     if (!matchedPassword) {
       throw new Error('Email or password does`t match');
