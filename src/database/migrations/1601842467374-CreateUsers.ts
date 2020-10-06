@@ -35,6 +35,10 @@ export class CreateUsers1601842467374 implements MigrationInterface {
             isNullable: true
           },
           {
+            name: 'status',
+            type: 'varchar'
+          },
+          {
             name: 'comp_id',
             type: 'varchar',
             isNullable: true

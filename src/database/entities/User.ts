@@ -1,4 +1,5 @@
 import {
+  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
@@ -8,7 +9,7 @@ import {
 } from 'typeorm';
 import { v4 } from 'uuid';
 import { Organization } from './Organization';
-
+import { hash } from 'bcryptjs';
 @Entity('users')
 export class User {
   @PrimaryColumn()
@@ -46,5 +47,10 @@ export class User {
       this.id = v4();
       this.status = 'PENDENTE';
     }
+  }
+
+  @BeforeInsert()
+  async validate() {
+    this.password = await hash(this.password, 8);
   }
 }
