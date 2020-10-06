@@ -1,11 +1,9 @@
 import { Router } from 'express';
+import { loginController } from '../../LoginControll/useCases/Login';
 import { userController } from '../../userManagement/useCases/User';
 
 const sessionsRoute = Router();
 
-sessionsRoute.post(
-  '/search',
-  userController.getUserByEmail.bind(userController)
-);
+sessionsRoute.post('/', loginController.handle.bind(loginController));
 
 export { sessionsRoute };

@@ -1,12 +1,11 @@
+import { User } from '../../../../database/entities/User';
+
 export interface ILoginRequestDTO {
   email: string;
   password: string;
 }
 
-export interface IPermissionsDTO {}
-
 export interface ILoginResponseDTO {
-  name: string;
+  user: User;
   token: string;
-  permissions: IPermissionsDTO;
 }
