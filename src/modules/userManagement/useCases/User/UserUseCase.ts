@@ -1,7 +1,8 @@
+import { getRepository, Repository } from 'typeorm';
 import { User } from '../../../../database/entities/User';
 import { IMailProvider } from '../../../../providers/IMailProvider';
 import { IUsersRepository } from '../../repositories/IUsersRepository';
-import { IUserRequestDTO } from './UserDTO';
+import { IUserRemoveRequestDTO, IUserRequestDTO } from './UserDTO';
 
 export class UserUseCase {
   constructor(
@@ -34,5 +35,14 @@ export class UserUseCase {
       subject: 'PzmCore',
       body: 'ENVIO DE EMAIL TESTE'
     });
+  }
+
+  async removeUseCase(data: IUserRemoveRequestDTO) {
+    const { id } = data;
+    const repository = getRepository(User);
+    const user = await repository.findOne(id);
+    if (user) {
+      repository.delete(user);
+    }
   }
 }

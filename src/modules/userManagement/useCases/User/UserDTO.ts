@@ -3,3 +3,7 @@ export interface IUserRequestDTO {
   email: string;
   password: string;
 }
+
+export interface IUserRemoveRequestDTO {
+  id: string;
+}

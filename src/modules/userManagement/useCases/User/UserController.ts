@@ -3,11 +3,11 @@ import { getCustomRepository, getRepository } from 'typeorm';
 import { User } from '../../../../database/entities/User';
 import { IMailProvider } from '../../../../providers/IMailProvider';
 import { UserRepository } from '../../repositories/implementations/UserRepository';
-import { IUserRequestDTO } from './UserDTO';
+import { IUserRemoveRequestDTO, IUserRequestDTO } from './UserDTO';
 import { UserUseCase } from './UserUseCase';
 
 export class UserController {
-  constructor(public mailProvider: IMailProvider) {}
+  constructor(public userUseCase: UserUseCase) {}
 
   async getUsers(request: Request, response: Response) {
     const users = await getRepository(User).find();
@@ -16,12 +16,23 @@ export class UserController {
 
   async createUser(request: Request<IUserRequestDTO>, response: Response) {
     try {
-      const repository = getCustomRepository(UserRepository);
-      const userUseCase = new UserUseCase(repository, this.mailProvider);
-      await userUseCase.execute(request.body);
+      await this.userUseCase.execute(request.body);
       return response.status(201).send();
     } catch (err) {
       response.status(400).json({ message: err.message });
+    }
+  }
+
+  async removeUser(
+    request: Request<IUserRemoveRequestDTO>,
+    response: Response
+  ) {
+    try {
+      const { id } = request.query;
+      this.userUseCase.removeUseCase({ id } as IUserRemoveRequestDTO);
+      response.status(200).send();
+    } catch (err) {
+      response.send(400).json({ message: err.message });
     }
   }
 }
