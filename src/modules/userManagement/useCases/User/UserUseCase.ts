@@ -1,8 +1,7 @@
-import { getRepository, Repository } from 'typeorm';
 import { User } from '../../../../database/entities/User';
 import { IMailProvider } from '../../../../providers/IMailProvider';
 import { IUsersRepository } from '../../repositories/IUsersRepository';
-import { IUserRemoveRequestDTO, IUserRequestDTO } from './UserDTO';
+import { IUserRequestDTO, IUserUpdateDTO } from './UserDTO';
 
 export class UserUseCase {
   constructor(
@@ -10,7 +9,7 @@ export class UserUseCase {
     private mailProvider: IMailProvider
   ) {}
 
-  async execute(data: IUserRequestDTO) {
+  async execute(data: IUserRequestDTO): Promise<void> {
     const userAlreadyExists = await this.usersRepository.findByEmail(
       data.email
     );
@@ -37,12 +36,51 @@ export class UserUseCase {
     });
   }
 
-  async removeUseCase(data: IUserRemoveRequestDTO) {
-    const { id } = data;
-    const repository = getRepository(User);
-    const user = await repository.findOne(id);
-    if (user) {
-      repository.delete(user);
+  async removeUseCase(data: string): Promise<void> {
+    const user = await this.usersRepository.findById(data);
+    if (!user) {
+      throw new Error('User not found!');
     }
+    await this.usersRepository.delete(user);
+  }
+
+  async findById(data: string): Promise<User> {
+    const user = await this.usersRepository.findById(data);
+    if (!user) {
+      throw new Error('User not found!');
+    }
+    return user;
+  }
+
+  async findByEmail(email: string): Promise<User | null> {
+    const user = await this.usersRepository.findByEmail(email);
+    if (!user) {
+      throw new Error('User not found!');
+    }
+    return user || null;
+  }
+
+  async getAllUsers(): Promise<User[]> {
+    const users = await this.usersRepository.all();
+
+    return users;
+  }
+
+  async updateUser(data: IUserUpdateDTO): Promise<void> {
+    /** check if email will be updated */
+    if (data.email) {
+      const userEmailCheck = await this.findByEmail(data.email);
+
+      if (userEmailCheck) {
+        throw new Error('This Email already in use!');
+      }
+    }
+
+    const user = await this.findById(data.id);
+    if (!user) {
+      throw new Error('User not found!');
+    }
+    const updatedUser = Object.assign(user, data);
+    await this.usersRepository.update(updatedUser);
   }
 }

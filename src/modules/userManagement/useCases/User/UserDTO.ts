@@ -4,6 +4,16 @@ export interface IUserRequestDTO {
   password: string;
 }
 
-export interface IUserRemoveRequestDTO {
+export interface IUserUpdateDTO {
   id: string;
+  name: string;
+  email: string;
+  password: string;
+  status: string;
+}
+
+export interface IUserSearchDTO {
+  id: string;
+  email: string;
+  status: string;
 }
