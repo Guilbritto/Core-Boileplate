@@ -28,6 +28,9 @@ export class User {
   @Column()
   public org_id?: string;
 
+  @Column()
+  public forgot_code?: string;
+
   @ManyToOne(() => Organization)
   @JoinColumn({ name: 'org_id' })
   public organization?: Organization;
