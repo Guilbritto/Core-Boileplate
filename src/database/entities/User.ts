@@ -1,4 +1,5 @@
 import {
+  AfterLoad,
   BeforeInsert,
   Column,
   CreateDateColumn,
@@ -52,5 +53,10 @@ export class User {
   @BeforeInsert()
   async validate() {
     this.password = await hash(this.password, 8);
+  }
+
+  @AfterLoad()
+  removePassword() {
+    delete this.password;
   }
 }
