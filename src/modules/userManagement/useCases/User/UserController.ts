@@ -1,4 +1,5 @@
 import { Request, Response } from 'express';
+import { User } from '../../../../database/entities/User';
 import { IUserRequestDTO, IUserSearchDTO, IUserUpdateDTO } from './UserDTO';
 import { UserUseCase } from './UserUseCase';
 
@@ -19,6 +20,7 @@ export class UserController {
       const { id } = request.params;
       if (typeof id === 'string') {
         const user = await this.userUseCase.findById(id);
+        delete user.password;
         return response.status(200).json(user);
       }
       return response.status(204).send();
@@ -31,7 +33,8 @@ export class UserController {
     try {
       const { email } = request.params;
       if (typeof email === 'string') {
-        const user = this.userUseCase.findByEmail(email);
+        const user = await this.userUseCase.findByEmail(email);
+        delete user?.password;
       }
     } catch (err) {
       response.status(400).json({ message: err.message });
@@ -53,6 +56,9 @@ export class UserController {
   async getAllUsers(request: Request, response: Response) {
     try {
       const users = await this.userUseCase.getAllUsers();
+      const userWithoutPassword = users.map(
+        (user: User) => delete user.password
+      );
       return response.status(200).json(users);
     } catch (err) {
       response.send(400).json({ message: err.message });
