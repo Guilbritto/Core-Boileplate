@@ -18,7 +18,7 @@ export class UserController {
     try {
       const repository = getCustomRepository(UserRepository);
       const userUseCase = new UserUseCase(repository, this.mailProvider);
-      userUseCase.execute(request.body);
+      await userUseCase.execute(request.body);
       return response.status(201).send();
     } catch (err) {
       response.status(400).json({ message: err.message });
