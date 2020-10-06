@@ -15,6 +15,10 @@ export class ForgotPasswordUseCase {
       throw new Error('Email not found, check our email e try again!');
     }
     const code = randomize('0', 8);
+
+    user.forgot_code = code;
+    await this.userRepository.update(user);
+
     await this.mailProvider.sendMail({
       to: {
         email: user.email,

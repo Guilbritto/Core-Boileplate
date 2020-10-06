@@ -5,7 +5,7 @@ import { ForgotPasswordUseCase } from './ForgotPasswordUseCase';
 export class ForgotPasswordController {
   constructor(private forgotPasswordUseCase: ForgotPasswordUseCase) {}
 
-  async handle(request: Request<IForgotPasswordRequest>, respomnse: Response) {
+  async handle(request: Request<IForgotPasswordRequest>, response: Response) {
     try {
       const { email } = request.body;
 
