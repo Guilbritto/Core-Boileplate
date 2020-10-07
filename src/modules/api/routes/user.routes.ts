@@ -1,7 +1,10 @@
 import { Router } from 'express';
+import ensureAuathenticated from '../../../middleware/ensureAuthenticated';
 import { userController } from '../../userManagement/useCases/User';
 
 const userRoute = Router();
+
+userRoute.use(ensureAuathenticated);
 
 userRoute.get('/', userController.getAllUsers.bind(userController));
 
