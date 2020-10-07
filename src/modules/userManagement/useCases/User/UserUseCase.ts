@@ -2,20 +2,20 @@ import { User } from '../../../../database/entities/User';
 import { IMailProvider } from '../../../../providers/IMailProvider';
 import { IUsersRepository } from '../../repositories/IUsersRepository';
 import { IUserRequestDTO, IUserUpdateDTO } from './UserDTO';
-
+import AppError from '../../../../errors/AppError';
 export class UserUseCase {
   constructor(
     private usersRepository: IUsersRepository,
     private mailProvider: IMailProvider
   ) {}
 
-  async execute(data: IUserRequestDTO): Promise<void> {
+  async createUser(data: IUserRequestDTO): Promise<void> {
     const userAlreadyExists = await this.usersRepository.findByEmail(
       data.email
     );
 
     if (userAlreadyExists) {
-      throw new Error('User already exists.');
+      throw new AppError('User already exists.');
     }
 
     const user = new User(data);
@@ -39,7 +39,7 @@ export class UserUseCase {
   async removeUseCase(data: string): Promise<void> {
     const user = await this.usersRepository.findById(data);
     if (!user) {
-      throw new Error('User not found!');
+      throw new AppError('User not found!');
     }
     await this.usersRepository.delete(user);
   }
@@ -47,7 +47,7 @@ export class UserUseCase {
   async findById(data: string): Promise<User> {
     const user = await this.usersRepository.findById(data);
     if (!user) {
-      throw new Error('User not found!');
+      throw new AppError('User not found!');
     }
     return user;
   }
@@ -55,7 +55,7 @@ export class UserUseCase {
   async findByEmail(email: string): Promise<User | null> {
     const user = await this.usersRepository.findByEmail(email);
     if (!user) {
-      throw new Error('User not found!');
+      throw new AppError('User not found!');
     }
     return user || null;
   }
@@ -72,13 +72,13 @@ export class UserUseCase {
       const userEmailCheck = await this.findByEmail(data.email);
 
       if (userEmailCheck) {
-        throw new Error('This Email already in use!');
+        throw new AppError('This Email already in use!');
       }
     }
 
     const user = await this.findById(data.id);
     if (!user) {
-      throw new Error('User not found!');
+      throw new AppError('User not found!');
     }
     const updatedUser = Object.assign(user, data);
     await this.usersRepository.update(updatedUser);

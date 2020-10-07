@@ -2,6 +2,7 @@ import { getRepository } from 'typeorm';
 import { IMailProvider } from '../../../../providers/IMailProvider';
 import { IUsersRepository } from '../../../userManagement/repositories/IUsersRepository';
 import randomize from 'randomatic';
+import AppError from '../../../../errors/AppError';
 export class ForgotPasswordUseCase {
   constructor(
     private userRepository: IUsersRepository,
@@ -12,7 +13,7 @@ export class ForgotPasswordUseCase {
     const user = await this.userRepository.findByEmail(email);
 
     if (!user) {
-      throw new Error('Email not found, check our email e try again!');
+      throw new AppError('Email not found, check our email e try again!');
     }
     const code = randomize('0', 8);
 
