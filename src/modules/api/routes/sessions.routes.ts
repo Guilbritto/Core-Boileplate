@@ -16,7 +16,7 @@ sessionsRoute.post(
   '/forgot/validate',
   forgotPasswordValidateController.handle.bind(forgotPasswordValidateController)
 );
-sessionsRoute.post(
+sessionsRoute.patch(
   '/forgot/change',
   forgotPasswordChangeController.handle.bind(forgotPasswordChangeController)
 );
