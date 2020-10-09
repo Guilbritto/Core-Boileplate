@@ -7,7 +7,7 @@ export class UserController {
   constructor(public userUseCase: UserUseCase) {}
 
   async createUser(request: Request<IUserRequestDTO>, response: Response) {
-    await this.userUseCase.execute(request.body);
+    await this.userUseCase.createUser(request.body);
     return response.status(201).send();
   }
 
