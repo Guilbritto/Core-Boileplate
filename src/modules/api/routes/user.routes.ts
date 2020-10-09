@@ -4,18 +4,17 @@ import { userController } from '../../userManagement/useCases/User';
 
 const userRoute = Router();
 
-userRoute.use(ensureAuathenticated);
 
-userRoute.get('/', userController.getAllUsers.bind(userController));
-
-userRoute.get('/:id', userController.getUserById.bind(userController));
+userRoute.get('/', ensureAuathenticated, userController.getAllUsers.bind(userController));
 
 userRoute.post('/', userController.createUser.bind(userController));
 
-userRoute.post('/search', userController.getUserByEmail.bind(userController));
+userRoute.get('/:id', ensureAuathenticated,  userController.getUserById.bind(userController));
 
-userRoute.put('/', userController.updateUser.bind(userController));
+userRoute.post('/search', ensureAuathenticated, userController.getUserByEmail.bind(userController));
 
-userRoute.delete('/:id', userController.removeUser.bind(userController));
+userRoute.put('/', ensureAuathenticated, userController.updateUser.bind(userController));
+
+userRoute.delete('/:id', ensureAuathenticated, userController.removeUser.bind(userController));
 
 export { userRoute };
