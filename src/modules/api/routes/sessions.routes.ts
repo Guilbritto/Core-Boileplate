@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { forgotPasswordController } from '../../LoginControll/useCases/ForgotPassword';
+import { forgotPasswordChangeController } from '../../LoginControll/useCases/forgotPasswordChange';
 import { forgotPasswordValidateController } from '../../LoginControll/useCases/ForgotPasswordValidate';
 import { loginController } from '../../LoginControll/useCases/Login';
 
@@ -14,6 +15,10 @@ sessionsRoute.post(
 sessionsRoute.post(
   '/forgot/validate',
   forgotPasswordValidateController.handle.bind(forgotPasswordValidateController)
+);
+sessionsRoute.post(
+  '/forgot/change',
+  forgotPasswordChangeController.handle.bind(forgotPasswordChangeController)
 );
 
 export { sessionsRoute };
