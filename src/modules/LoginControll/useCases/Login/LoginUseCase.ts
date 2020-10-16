@@ -1,0 +1,33 @@
+import { ILoginRequestDTO, ILoginResponseDTO } from './LoginDTO';
+import { IUsersRepository } from '../../../userManagement/repositories/IUsersRepository';
+import { compare } from 'bcryptjs';
+import { sign } from 'jsonwebtoken';
+import { IAuthentication } from '../../../security/interfaces/IAuthentication';
+import AppError from '../../../../errors/AppError';
+export class LoginUseCase {
+  constructor(
+    private userRepository: IUsersRepository,
+    private authentication: IAuthentication
+  ) {}
+
+  async execute(data: ILoginRequestDTO): Promise<ILoginResponseDTO> {
+    const user = await this.userRepository.findByEmail(data.email);
+
+    if (!user) {
+      throw new AppError('Email or password does`t match');
+    }
+
+    const matchedPassword = await compare(data.password, user.password);
+
+    if (!matchedPassword) {
+      throw new AppError('Email or password does`t match');
+    }
+
+    const token = this.authentication.generateToken({}, '1d', user?.id);
+
+    return {
+      user: user,
+      token: token
+    } as ILoginResponseDTO;
+  }
+}
