@@ -32,17 +32,6 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           source: ".,!node_modules"
           target: "~/app/pzmcore"      
-          
-      - name: Install dependencies on Digital Ocean
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          script: |
-            cd ~/app/pzmcore 
-            yarn
             
       - name: Run Migrations on Digital Ocean
         uses: appleboy/ssh-action@master
@@ -54,12 +43,5 @@ jobs:
           script: |
             cd ~/app/pzmcore 
             ./node_modules/.bin/typeorm migration:run
-             
-      - name: Restart Server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_KEY }}
-          port: ${{ secrets.SSH_PORT }}
-          script: pm2 restart pzmcore
+            yarn
+            pm2 restart pzmcore
