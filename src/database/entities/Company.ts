@@ -9,23 +9,23 @@ import { Organization } from './Organization';
 
 @Entity('companies')
 export class Company {
-  @PrimaryColumn()
+  @PrimaryColumn('text')
   public id: string;
 
-  @Column()
+  @Column('text')
   public name: string;
 
-  @Column()
+  @Column('text')
   public status: string;
 
-  @Column()
+  @Column('text')
   public org_id: string;
 
   @ManyToOne(() => Organization)
   public organization: Organization;
 
-  @CreateDateColumn()
+  @CreateDateColumn({ default: new Date() })
   public created_at: Date;
-  @CreateDateColumn()
+  @CreateDateColumn({ default: new Date() })
   public updated_at: Date;
 }

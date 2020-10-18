@@ -10,17 +10,17 @@ import { User } from './User';
 
 @Entity('organizations')
 export class Organization {
-  @PrimaryColumn()
+  @PrimaryColumn('text')
   public readonly id: string;
-  @Column()
+  @Column('text')
   public description: string;
   @OneToMany((type) => User, (user) => user.org_id)
   public user: User;
-  @Column()
+  @Column('text')
   public status: string;
-  @CreateDateColumn()
+  @CreateDateColumn({ default: new Date() })
   public created_at: Date;
-  @CreateDateColumn()
+  @CreateDateColumn({ default: new Date() })
   public updated_at: Date;
 
   constructor(props: Omit<Organization, 'id'>, id?: string) {
