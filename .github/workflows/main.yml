@@ -53,9 +53,9 @@ jobs:
           port: ${{ secrets.SSH_PORT }}
           script: |
             cd ~/app/pzmcore 
-            ./node_modules/.bin/typeorm mitgration:run
+            ./node_modules/.bin/typeorm migration:run
              
-      - name: Run Migrations on Digital Ocean
+      - name: Restart Server
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
