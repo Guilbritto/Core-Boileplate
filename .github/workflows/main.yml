@@ -33,7 +33,7 @@ jobs:
           source: ".,!node_modules"
           target: "~/app/pzmcore"      
             
-      - name: Run Migrations on Digital Ocean
+      - name: Digital Ocean Scripts
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
