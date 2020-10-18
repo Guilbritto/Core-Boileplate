@@ -2,12 +2,12 @@
   "name": "default",
   "type": "postgres",
   "host": "localhost",
-  "port": 5432,
-  "username": "postgres",
-  "password": "pzmcore",
+  "port": 35998,
+  "username": "pzmcore",
+  "password": "fc14d0c6a3e33957c4aef3a7104b7b67",
   "database": "pzmcore",
-  "entities": ["./src/database/entities/*.ts"],
-  "migrations": ["./src/database/migrations/*.ts"],
+  "entities": ["./dist/database/entities/*.js"],
+  "migrations": ["./dist/database/migrations/*.js"],
   "cli": {
     "entitiesDir": "./src/database/entities",
     "migrationsDir": "./src/database/migrations"
