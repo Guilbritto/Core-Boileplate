@@ -13,29 +13,29 @@ import { Organization } from './Organization';
 import { hash } from 'bcryptjs';
 @Entity('users')
 export class User {
-  @PrimaryColumn()
+  @PrimaryColumn('text')
   public readonly id?: string;
 
-  @Column()
+  @Column('text')
   public name: string;
 
-  @Column()
+  @Column('text')
   public email: string;
 
-  @Column()
+  @Column('text')
   public password: string;
 
-  @Column()
+  @Column('text')
   public org_id?: string;
 
-  @Column()
+  @Column('text')
   public forgot_code?: string;
 
   @ManyToOne(() => Organization)
   @JoinColumn({ name: 'org_id' })
   public organization?: Organization;
 
-  @Column()
+  @Column('text')
   public status?: string;
 
   @CreateDateColumn({ default: new Date() })
@@ -44,7 +44,7 @@ export class User {
   @CreateDateColumn({ default: new Date() })
   public updated_at?: Date;
 
-  constructor(props: Omit<User, 'id'>, id?: string) {
+  constructor(props: Omit<User, 'id'|'updated_at'|'created_at'|'status'|'organization'|'forgot_code'| 'org_id'| 'validate' >, id?: string) {
     Object.assign(this, props);
 
     if (!id) {
