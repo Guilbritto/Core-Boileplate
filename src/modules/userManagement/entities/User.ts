@@ -45,7 +45,7 @@ export class User {
   @CreateDateColumn({ default: new Date() })
   public updated_at?: Date;
 
-  constructor(props: Omit<User, 'id'|'updated_at'|'created_at'|'status'|'organization'|'forgot_code'| 'org_id'| 'validate' >, id?: string) {
+  constructor(props: Omit<User, 'id'|'updated_at'|'created_at'|'status'|'organization'|'forgot_code'| 'org_id' >, id?: string) {
     Object.assign(this, props);
 
     if (!id) {
@@ -54,8 +54,5 @@ export class User {
     }
   }
 
-  @BeforeInsert()
-  async validate() {
-    this.password = await hash(this.password, 8);
-  }
+  
 }

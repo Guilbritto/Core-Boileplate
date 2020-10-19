@@ -1,13 +1,13 @@
 import { ILoginRequestDTO, ILoginResponseDTO } from './LoginDTO';
 import { IUsersRepository } from '../../../userManagement/repositories/IUsersRepository';
-import { compare } from 'bcryptjs';
-import { sign } from 'jsonwebtoken';
 import { IAuthentication } from '../../../security/interfaces/IAuthentication';
 import AppError from '../../../../errors/AppError';
+import { IHashProvider } from '../../../security/interfaces/IHashProvider';
 export class LoginUseCase {
   constructor(
     private userRepository: IUsersRepository,
-    private authentication: IAuthentication
+    private authentication: IAuthentication,
+    private hashProvider: IHashProvider,
   ) {}
 
   async execute(data: ILoginRequestDTO): Promise<ILoginResponseDTO> {
@@ -17,7 +17,7 @@ export class LoginUseCase {
       throw new AppError('Email or password does`t match');
     }
 
-    const matchedPassword = await compare(data.password, user.password);
+    const matchedPassword = await this.hashProvider.compareHash(data.password, user.password);
 
     if (!matchedPassword) {
       throw new AppError('Email or password does`t match');

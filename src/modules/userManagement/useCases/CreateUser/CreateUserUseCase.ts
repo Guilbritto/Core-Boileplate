@@ -3,11 +3,13 @@ import { IUsersRepository } from '../../repositories/IUsersRepository';
 import AppError from '../../../../errors/AppError';
 import { ICreateUserRequestDTO } from './CreateUserDTO';
 import { User } from '../../entities/User';
+import { IHashProvider } from '../../../security/interfaces/IHashProvider';
 
 export class CreateUserUseCase {
   constructor(
     private usersRepository: IUsersRepository,
-    private mailProvider: IMailProvider
+    private mailProvider: IMailProvider,
+    private hashProvider: IHashProvider
   ) {}
 
   async execute(data: ICreateUserRequestDTO): Promise<void> {
@@ -21,6 +23,8 @@ export class CreateUserUseCase {
 
     const user = new User(data);
 
+    user.password = await this.hashProvider.generateHash(user.password)
+    
     this.usersRepository.save(user);
 
     this.mailProvider.sendMail({
