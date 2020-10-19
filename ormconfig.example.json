@@ -6,10 +6,9 @@
   "username": "postgres",
   "password": "pzmcore",
   "database": "pzmcore",
-  "entities": ["./src/database/entities/*.ts"],
+  "entities": ["./**/entities/*.ts"],
   "migrations": ["./src/database/migrations/*.ts"],
   "cli": {
-    "entitiesDir": "./src/database/entities",
     "migrationsDir": "./src/database/migrations"
   }
 }

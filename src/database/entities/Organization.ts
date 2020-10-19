@@ -6,7 +6,7 @@ import {
   PrimaryColumn
 } from 'typeorm';
 import { v4 } from 'uuid';
-import { User } from './User';
+import { User } from '../../modules/userManagement/entities/User';
 
 @Entity('organizations')
 export class Organization {

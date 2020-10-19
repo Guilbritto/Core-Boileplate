@@ -1,6 +1,6 @@
-import { User } from '../../../../database/entities/User';
 import { IUsersRepository } from '../../repositories/IUsersRepository';
 import AppError from '../../../../errors/AppError';
+import { User } from '../../entities/User';
 export class FindByIdUserUseCase {
   constructor(
     private usersRepository: IUsersRepository,

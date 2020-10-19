@@ -1,8 +1,8 @@
-import { User } from '../../../../database/entities/User';
 import { IMailProvider } from '../../../../providers/IMailProvider';
 import { IUsersRepository } from '../../repositories/IUsersRepository';
 import AppError from '../../../../errors/AppError';
 import { ICreateUserRequestDTO } from './CreateUserDTO';
+import { User } from '../../entities/User';
 
 export class CreateUserUseCase {
   constructor(
