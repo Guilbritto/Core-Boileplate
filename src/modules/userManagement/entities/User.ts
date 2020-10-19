@@ -1,5 +1,4 @@
 import {
-  AfterLoad,
   BeforeInsert,
   Column,
   CreateDateColumn,
@@ -9,8 +8,10 @@ import {
   PrimaryColumn
 } from 'typeorm';
 import { v4 } from 'uuid';
-import { Organization } from './Organization';
 import { hash } from 'bcryptjs';
+import { Organization } from '../../../database/entities/Organization';
+
+
 @Entity('users')
 export class User {
   @PrimaryColumn('text')

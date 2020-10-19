@@ -21,7 +21,7 @@ app.use(
         message: err.message
       });
     }
-
+    
     console.error(err);
 
     return response.status(500).json({

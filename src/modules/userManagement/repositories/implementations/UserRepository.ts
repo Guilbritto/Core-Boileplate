@@ -1,11 +1,12 @@
-import { EntityRepository, getRepository, Repository } from 'typeorm';
-import { User } from '../../../../database/entities/User';
+import { getRepository } from 'typeorm';
+import { User } from '../../entities/User';
 import { IUsersRepository } from '../IUsersRepository';
 
 export class UserRepository implements IUsersRepository {
   async findById(id: string): Promise<User | null> {
     const user = await getRepository(User).findOne({
-      where: { id }
+      where: { id },
+      select:['id','name', 'email', 'status', 'forgot_code', 'created_at', 'updated_at', 'status', 'org_id', 'organization']
     });
     return user || null;
   }
@@ -24,13 +25,16 @@ export class UserRepository implements IUsersRepository {
 
   async findByEmail(email: string): Promise<User | null> {
     const user = await getRepository(User).findOne({
-      where: { email }
+      where: { email },
+      select:['id','name', 'email', 'status', 'forgot_code', 'created_at', 'updated_at', 'status', 'org_id', 'organization']
     });
     return user || null;
   }
 
   async all(): Promise<User[]> {
-    const users = await getRepository(User).find();
+    const users = await getRepository(User).find({
+      select:['id','name', 'email', 'status', 'forgot_code', 'created_at', 'updated_at', 'status', 'org_id', 'organization']
+    });
     return users;
   }
 }

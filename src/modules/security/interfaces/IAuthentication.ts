@@ -3,6 +3,6 @@ export interface IAuthentication {
   generateToken(
     payload: object,
     expirationTime: string,
-    subject: string
+    subject: string | undefined
   ): string;
 }

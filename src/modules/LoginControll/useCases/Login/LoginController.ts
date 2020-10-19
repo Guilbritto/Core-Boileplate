@@ -11,7 +11,7 @@ export class LoginController {
     response: Response<ILoginResponseDTO | IApplictionDefaultError>
   ) {
     const user = await this.loginUseCase.execute(request.body);
-    delete user.user.password;
+    
     return response.status(200).json(user);
   }
 }
