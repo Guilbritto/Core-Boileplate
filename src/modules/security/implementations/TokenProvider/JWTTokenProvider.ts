@@ -1,5 +1,5 @@
 import { sign } from 'jsonwebtoken';
-import authConfig from '../../../../config/auth';
+import authConfig from '../../../../shared/config/auth';
 import { IAuthentication } from '../../interfaces/IAuthentication';
 
 export class JWTTokenProvider implements IAuthentication {

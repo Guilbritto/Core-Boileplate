@@ -1,4 +1,4 @@
-import { User } from '../../../../database/entities/User';
+import { User } from "../../../userManagement/entities/User";
 
 export interface ILoginRequestDTO {
   email: string;

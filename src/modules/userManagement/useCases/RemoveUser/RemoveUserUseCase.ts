@@ -1,5 +1,5 @@
 import { IUsersRepository } from '../../repositories/IUsersRepository';
-import AppError from '../../../../errors/AppError';
+import AppError from '../../../../shared/errors/AppError';
 export class RemoveUserUseCase {
   
   constructor(
@@ -7,7 +7,7 @@ export class RemoveUserUseCase {
   ) {}
 
 
-  async handle(data: string): Promise<void> {
+  async execute(data: string): Promise<void> {
     const user = await this.usersRepository.findById(data);
     if (!user) {
       throw new AppError('User not found!');

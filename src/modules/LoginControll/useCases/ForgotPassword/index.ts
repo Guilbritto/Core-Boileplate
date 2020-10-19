@@ -1,4 +1,4 @@
-import { MailtrapMailProvider } from '../../../../providers/implementations/MailtrapMailProvider';
+import { MailtrapMailProvider } from '../../../../shared/providers/implementations/MailtrapMailProvider';
 import { UserRepository } from '../../../userManagement/repositories/implementations/UserRepository';
 import { ForgotPasswordController } from './ForgotPasswordController';
 import { ForgotPasswordUseCase } from './ForgotPasswordUseCase';

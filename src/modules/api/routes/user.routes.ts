@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import ensureAuathenticated from '../../../middleware/ensureAuthenticated';
+import ensureAuathenticated from '../../../shared/middleware/ensureAuthenticated';
 import { findAllUserController } from '../../userManagement/useCases/FindAll';
 import { createUserController } from '../../userManagement/useCases/CreateUser';
 import { findByIdUserController } from '../../userManagement/useCases/FindById';
@@ -20,6 +20,6 @@ userRoute.post('/search', ensureAuathenticated, findByEmailUserController.handle
 
 userRoute.put('/', ensureAuathenticated, updateUserController.handle.bind(updateUserController));
 
-userRoute.delete('/:id', ensureAuathenticated, removeUserController.execute.bind(removeUserController));
+userRoute.delete('/:id', ensureAuathenticated, removeUserController.handle.bind(removeUserController));
 
 export { userRoute };

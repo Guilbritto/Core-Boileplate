@@ -1,12 +1,13 @@
 import { IUsersRepository } from '../../../userManagement/repositories/IUsersRepository';
-import AppError from '../../../../errors/AppError';
+import AppError from '../../../../shared/errors/AppError';
 import { IForgotPasswordChangeRequest } from './ForgotPasswordChangeDTO';
-import { compare, hash } from 'bcryptjs';
+import { IHashProvider } from '../../../security/interfaces/IHashProvider';
 
 
 export class ForgotPasswordChangeUseCase {
   constructor(
     private userRepository: IUsersRepository,
+    private hashProvider: IHashProvider,
   ) {}
 
   async execute({code, email, password}: IForgotPasswordChangeRequest): Promise<void> {
@@ -16,7 +17,7 @@ export class ForgotPasswordChangeUseCase {
       throw new AppError('Invalid Code!')
     }
     
-    user.password = await hash(password, 8);
+    user.password = await this.hashProvider.generateHash(password);
 
     this.userRepository.update(user);
   }

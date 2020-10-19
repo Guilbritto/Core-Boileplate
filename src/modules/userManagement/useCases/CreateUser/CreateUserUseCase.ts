@@ -1,6 +1,6 @@
-import { IMailProvider } from '../../../../providers/IMailProvider';
+import { IMailProvider } from '../../../../shared/providers/IMailProvider';
 import { IUsersRepository } from '../../repositories/IUsersRepository';
-import AppError from '../../../../errors/AppError';
+import AppError from '../../../../shared/errors/AppError';
 import { ICreateUserRequestDTO } from './CreateUserDTO';
 import { User } from '../../entities/User';
 import { IHashProvider } from '../../../security/interfaces/IHashProvider';
@@ -12,7 +12,7 @@ export class CreateUserUseCase {
     private hashProvider: IHashProvider
   ) {}
 
-  async execute(data: ICreateUserRequestDTO): Promise<void> {
+  async execute(data: ICreateUserRequestDTO): Promise<User> {
     const userAlreadyExists = await this.usersRepository.findByEmail(
       data.email
     );
@@ -39,5 +39,7 @@ export class CreateUserUseCase {
       subject: 'PzmCore',
       body: 'ENVIO DE EMAIL TESTE'
     });
+    
+    return user;
   }
 }

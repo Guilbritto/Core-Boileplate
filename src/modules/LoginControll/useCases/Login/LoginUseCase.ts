@@ -1,7 +1,7 @@
 import { ILoginRequestDTO, ILoginResponseDTO } from './LoginDTO';
 import { IUsersRepository } from '../../../userManagement/repositories/IUsersRepository';
 import { IAuthentication } from '../../../security/interfaces/IAuthentication';
-import AppError from '../../../../errors/AppError';
+import AppError from '../../../../shared/errors/AppError';
 import { IHashProvider } from '../../../security/interfaces/IHashProvider';
 export class LoginUseCase {
   constructor(

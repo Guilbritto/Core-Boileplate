@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { IApplictionDefaultError } from '../../../../interface/IApplicationDefaultError';
+import { IApplictionDefaultError } from '../../../../shared/interface/IApplicationDefaultError';
 import { ILoginRequestDTO, ILoginResponseDTO } from './LoginDTO';
 import { LoginUseCase } from './LoginUseCase';
 

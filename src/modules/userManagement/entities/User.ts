@@ -1,5 +1,4 @@
 import {
-  BeforeInsert,
   Column,
   CreateDateColumn,
   Entity,
@@ -8,8 +7,7 @@ import {
   PrimaryColumn
 } from 'typeorm';
 import { v4 } from 'uuid';
-import { hash } from 'bcryptjs';
-import { Organization } from '../../../database/entities/Organization';
+import { Organization } from '../../../shared/database/entities/Organization';
 
 
 @Entity('users')

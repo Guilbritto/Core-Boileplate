@@ -1,8 +1,8 @@
 import { getRepository } from 'typeorm';
-import { IMailProvider } from '../../../../providers/IMailProvider';
+import { IMailProvider } from '../../../../shared/providers/IMailProvider';
 import { IUsersRepository } from '../../../userManagement/repositories/IUsersRepository';
 import randomize from 'randomatic';
-import AppError from '../../../../errors/AppError';
+import AppError from '../../../../shared/errors/AppError';
 export class ForgotPasswordUseCase {
   constructor(
     private userRepository: IUsersRepository,
