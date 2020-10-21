@@ -7,14 +7,13 @@ interface ITokenPayload {
   exp: number;
   sub: string;
 }
-
 export default function ensureAuathenticated(
   request: Request,
   response: Response,
   next: NextFunction
 ): void {
   const authHeader = request.headers.authorization;
-
+  
   if (!authHeader) {
     throw new AppError('JWT token is missing');
   }

@@ -1,8 +1,8 @@
 import { sign } from 'jsonwebtoken';
 import authConfig from '../../../../shared/config/auth';
-import { IAuthentication } from '../../interfaces/IAuthentication';
+import { ITokenProvider } from '../../interfaces/ITokenProvider';
 
-export class JWTTokenProvider implements IAuthentication {
+export class JWTTokenProvider implements ITokenProvider {
   generateToken(
     payload: object,
     expirationTime: string,

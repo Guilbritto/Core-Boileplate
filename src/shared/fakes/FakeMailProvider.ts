@@ -4,6 +4,6 @@ export class FakeMailProvider implements IMailProvider {
   constructor() {}
 
   async sendMail(message: IMessage): Promise<void> {
-    console.log('email enviado');
+    const fake = 'sended mail'
   }
 }

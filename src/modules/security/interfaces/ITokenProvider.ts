@@ -1,4 +1,4 @@
-export interface IAuthentication {
+export interface ITokenProvider {
   /** Generate a JWT token */
   generateToken(
     payload: object,
