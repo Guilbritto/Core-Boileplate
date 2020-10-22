@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import { forgotPasswordController } from '../../LoginControll/useCases/ForgotPassword';
-import { forgotPasswordChangeController } from '../../LoginControll/useCases/forgotPasswordChange';
-import { forgotPasswordValidateController } from '../../LoginControll/useCases/ForgotPasswordValidate';
-import { loginController } from '../../LoginControll/useCases/Login';
+import { forgotPasswordController } from '../../loginControll/useCases/ForgotPassword';
+import { forgotPasswordChangeController } from '../../loginControll/useCases/forgotPasswordChange';
+import { forgotPasswordValidateController } from '../../loginControll/useCases/ForgotPasswordValidate';
+import { loginController } from '../../loginControll/useCases/Login';
 
 const sessionsRoute = Router();
 

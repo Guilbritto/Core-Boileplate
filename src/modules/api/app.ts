@@ -3,7 +3,7 @@ import 'express-async-errors';
 import { createConnection } from 'typeorm';
 import routes from './routes';
 import cors from 'cors';
-import AppError from '../../errors/AppError';
+import AppError from '../../shared/errors/AppError';
 
 createConnection();
 
@@ -21,7 +21,7 @@ app.use(
         message: err.message
       });
     }
-
+    
     console.error(err);
 
     return response.status(500).json({

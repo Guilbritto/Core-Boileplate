@@ -1,20 +1,25 @@
 import { Router } from 'express';
-import ensureAuathenticated from '../../../middleware/ensureAuthenticated';
-import { userController } from '../../userManagement/useCases/User';
+import ensureAuathenticated from '../../../shared/middleware/ensureAuthenticated';
+import { findAllUserController } from '../../userManagement/useCases/FindAll';
+import { createUserController } from '../../userManagement/useCases/CreateUser';
+import { findByIdUserController } from '../../userManagement/useCases/FindById';
+import { removeUserController } from '../../userManagement/useCases/RemoveUser';
+import { updateUserController } from '../../userManagement/useCases/UpdateUser';
+import { findByEmailUserController } from '../../userManagement/useCases/FindByEmail';
 
 const userRoute = Router();
 
 
-userRoute.get('/', ensureAuathenticated, userController.getAllUsers.bind(userController));
+userRoute.get('/', ensureAuathenticated, findAllUserController.handle.bind(findAllUserController));
 
-userRoute.post('/', userController.createUser.bind(userController));
+userRoute.post('/', createUserController.heandle.bind(createUserController));
 
-userRoute.get('/:id', ensureAuathenticated,  userController.getUserById.bind(userController));
+userRoute.get('/:id', ensureAuathenticated,  findByIdUserController.handle.bind(findByIdUserController));
 
-userRoute.post('/search', ensureAuathenticated, userController.getUserByEmail.bind(userController));
+userRoute.post('/search', ensureAuathenticated, findByEmailUserController.handle.bind(findByEmailUserController));
 
-userRoute.put('/', ensureAuathenticated, userController.updateUser.bind(userController));
+userRoute.put('/', ensureAuathenticated, updateUserController.handle.bind(updateUserController));
 
-userRoute.delete('/:id', ensureAuathenticated, userController.removeUser.bind(userController));
+userRoute.delete('/:id', ensureAuathenticated, removeUserController.handle.bind(removeUserController));
 
 export { userRoute };
