@@ -1,7 +1,4 @@
-import { FakeHashProvider } from "../../../../shared/fakes/FakeHashProvider";
-import { FakeMailProvider } from "../../../../shared/fakes/FakeMailProvider";
 import { FakeUserRepository } from "../../../../shared/fakes/FakeUserRepository";
-import { User } from "../../entities/User";
 import { FindAllUserUseCase } from "./FindAllUserUseCase";
 
 describe('FindAll', () => {
@@ -25,9 +22,4 @@ describe('FindAll', () => {
     expect(users.length === 2).toBe(true);
     
   })
-
-
-
-  
-
 })
