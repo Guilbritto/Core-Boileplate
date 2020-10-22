@@ -2,7 +2,6 @@ import {
   MigrationInterface,
   QueryRunner,
   Table,
-  TableForeignKey
 } from 'typeorm';
 
 export class CreateUsers1601842467374 implements MigrationInterface {
@@ -30,11 +29,6 @@ export class CreateUsers1601842467374 implements MigrationInterface {
             type: 'varchar'
           },
           {
-            name: 'org_id',
-            type: 'varchar',
-            isNullable: true
-          },
-          {
             name: 'status',
             type: 'varchar'
           },
@@ -44,78 +38,25 @@ export class CreateUsers1601842467374 implements MigrationInterface {
             isNullable: true
           },
           {
-            name: 'comp_id',
-            type: 'varchar',
-            isNullable: true
-          },
-          {
-            name: 'div_id',
-            type: 'varchar',
-            isNullable: true
-          },
-          {
             name: 'created_at',
             type: 'timestamp with time zone',
-            isNullable: true
+            isNullable: true,
+            default: 'now()'
+            
           },
           {
             name: 'updated_at',
             type: 'timestamp with time zone',
-            isNullable: true
+            isNullable: true,
+            default: 'now()'
           }
         ]
-      })
-    );
-    await queryRunner.createForeignKey(
-      'users',
-      new TableForeignKey({
-        columnNames: ['org_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'organizations',
-        onDelete: 'CASCADE'
-      })
-    );
-    await queryRunner.createForeignKey(
-      'users',
-      new TableForeignKey({
-        columnNames: ['comp_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'companies',
-        onDelete: 'CASCADE'
-      })
-    );
-    await queryRunner.createForeignKey(
-      'users',
-      new TableForeignKey({
-        columnNames: ['div_id'],
-        referencedColumnNames: ['id'],
-        referencedTableName: 'divisions',
-        onDelete: 'CASCADE'
       })
     );
   }
 
   public async down(queryRunner: QueryRunner): Promise<void> {
-    const usersTable = await queryRunner.getTable('users');
 
-    const fkDivID = usersTable?.foreignKeys.find(
-      (fk) => fk.columnNames.indexOf('div_id') !== -1
-    );
-    const fkCompID = usersTable?.foreignKeys.find(
-      (fk) => fk.columnNames.indexOf('comp_id') !== -1
-    );
-    const fkOrgId = usersTable?.foreignKeys.find(
-      (fk) => fk.columnNames.indexOf('org_id') !== -1
-    );
-    if (fkDivID) {
-      await queryRunner.dropForeignKey('users', fkDivID);
-    }
-    if (fkCompID) {
-      await queryRunner.dropForeignKey('users', fkCompID);
-    }
-    if (fkOrgId) {
-      await queryRunner.dropForeignKey('users', fkOrgId);
-    }
     await queryRunner.dropTable('users');
   }
 }

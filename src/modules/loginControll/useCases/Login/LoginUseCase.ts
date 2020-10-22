@@ -15,7 +15,6 @@ export class LoginUseCase {
     if (!user) {
       throw new AppError('Email or password does`t match');
     }
-
     const matchedPassword = await this.hashProvider.compareHash(data.password, user.password);
 
     if (!matchedPassword) {
