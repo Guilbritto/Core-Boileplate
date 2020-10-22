@@ -19,7 +19,9 @@ export class ModuleRepostiroy implements IModuleRepository{
   async findById(id: string): Promise<Module | undefined> {
     
     return  await getRepository(Module).findOne({
-      where: {id}
+      where: {id},
+      relations: ['user']
+      
     });
 
   }
