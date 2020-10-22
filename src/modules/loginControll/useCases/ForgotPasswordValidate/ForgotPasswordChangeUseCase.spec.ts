@@ -2,7 +2,7 @@ import { FakeHashProvider } from "../../../../shared/fakes/FakeHashProvider"
 import { FakeMailProvider } from "../../../../shared/fakes/FakeMailProvider"
 import { FakeUserRepository } from "../../../../shared/fakes/FakeUserRepository"
 import { CreateUserUseCase } from "../../../userManagement/useCases/CreateUser/CreateUserUseCase"
-import AppError from "../../../../shared/errors/AppError";
+import { AppError } from "../../../../shared/errors/AppError";
 import { ForgotPasswordValidateUseCase } from "./ForgotPasswordValidateUseCase"
 import { ForgotPasswordUseCase } from "../ForgotPassword/ForgotPasswordUseCase";
 

@@ -1,5 +1,5 @@
 import { FakeUserRepository } from "../../../../shared/fakes/FakeUserRepository";
-import AppError from "../../../../shared/errors/AppError";
+import { AppError } from "../../../../shared/errors/AppError";
 import { FindByIdUserUseCase } from "./FindByIdUserUseCase";
 
 describe('FindByEmail', () => {

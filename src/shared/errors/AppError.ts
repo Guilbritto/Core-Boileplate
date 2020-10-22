@@ -8,4 +8,4 @@ class Error {
   }
 }
 
-export default Error;
+export  { Error as AppError}

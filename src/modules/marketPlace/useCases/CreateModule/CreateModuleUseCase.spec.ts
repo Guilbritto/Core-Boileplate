@@ -3,7 +3,7 @@ import { FakeModuleRepository } from "../../../../shared/fakes/FakeModuleReposit
 import { FakeUserRepository } from "../../../../shared/fakes/FakeUserRepository";
 import { User } from "../../../userManagement/entities/User";
 import { CreateModuleUseCase } from "./CreateModuleUseCase";
-import AppError from '../../../../shared/errors/AppError';
+import { AppError } from '../../../../shared/errors/AppError';
 
 
 describe('Create Module', () => {

@@ -1,6 +1,6 @@
 import { IMailProvider } from '../../../../shared/providers/IMailProvider';
 import { IUsersRepository } from '../../repositories/IUsersRepository';
-import AppError from '../../../../shared/errors/AppError';
+import { AppError } from '../../../../shared/errors/AppError';
 import { ICreateUserRequestDTO } from './CreateUserDTO';
 import { User } from '../../entities/User';
 import { IHashProvider } from '../../../security/interfaces/IHashProvider';

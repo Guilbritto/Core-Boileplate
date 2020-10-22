@@ -1,5 +1,5 @@
 import { IUsersRepository } from '../../repositories/IUsersRepository';
-import AppError from '../../../../shared/errors/AppError';
+import { AppError } from '../../../../shared/errors/AppError';
 import { User } from '../../entities/User';
 
 export class FindByEmailUserUseCase {

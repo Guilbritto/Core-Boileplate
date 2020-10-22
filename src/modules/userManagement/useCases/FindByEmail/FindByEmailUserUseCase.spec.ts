@@ -1,6 +1,6 @@
 import { FakeUserRepository } from "../../../../shared/fakes/FakeUserRepository";
 import { FindByEmailUserUseCase } from "./FindByEmailUserUseCase";
-import AppError from "../../../../shared/errors/AppError";
+import { AppError } from "../../../../shared/errors/AppError";
 
 describe('FindByEmail', () => {
   it('Should be able to get user by email', async () => {

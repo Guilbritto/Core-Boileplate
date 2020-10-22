@@ -1,7 +1,7 @@
 import { IUsersRepository } from '../../../userManagement/repositories/IUsersRepository';
 import {IModuleRepository} from '../../repositories/IModuleRepository'
 import { ICreateModuleRequest } from './CreateModuleDTO';
-import AppError from '../../../../shared/errors/AppError'
+import { AppError } from '../../../../shared/errors/AppError'
 import { Module } from '../../entities/Modules';
 
 

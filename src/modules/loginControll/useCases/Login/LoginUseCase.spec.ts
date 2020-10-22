@@ -4,7 +4,7 @@ import { FakeUserRepository } from "../../../../shared/fakes/FakeUserRepository"
 import { JWTTokenProvider } from "../../../security/implementations/TokenProvider/JWTTokenProvider"
 import { CreateUserUseCase } from "../../../userManagement/useCases/CreateUser/CreateUserUseCase"
 import { LoginUseCase } from "./LoginUseCase"
-import AppError from "../../../../shared/errors/AppError";
+import { AppError } from "../../../../shared/errors/AppError";
 describe('Login', () => {
   it('Should be able to login', async () => {
     const fakeMailProvider = new FakeMailProvider()

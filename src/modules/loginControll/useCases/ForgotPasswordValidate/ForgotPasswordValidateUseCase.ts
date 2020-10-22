@@ -1,5 +1,5 @@
 import { IUsersRepository } from '../../../userManagement/repositories/IUsersRepository';
-import AppError from '../../../../shared/errors/AppError';
+import { AppError } from '../../../../shared/errors/AppError';
 export class ForgotPasswordValidateUseCase {
   constructor(
     private userRepository: IUsersRepository,

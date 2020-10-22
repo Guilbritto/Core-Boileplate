@@ -1,7 +1,7 @@
 import { FakeHashProvider } from "../../../../shared/fakes/FakeHashProvider";
 import { FakeMailProvider } from "../../../../shared/fakes/FakeMailProvider";
 import { FakeUserRepository } from "../../../../shared/fakes/FakeUserRepository";
-import AppError from "../../../../shared/errors/AppError";
+import { AppError } from "../../../../shared/errors/AppError";
 import { CreateUserUseCase } from "./CreateUserUseCase";
 
 describe('CreateUser', () => {
