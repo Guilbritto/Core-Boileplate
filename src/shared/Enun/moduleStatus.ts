@@ -1,0 +1,6 @@
+export enum ModuleStatus  {
+  ATIVO = 'ATIVO',
+  INATIVO = 'INATIVO',
+  APROVACAO = 'APROVACAO',
+  EM_DESENVOLVIMENTO = 'EM_DESENVOLVIMENTO'
+}

@@ -11,15 +11,13 @@ describe('FindByEmail', () => {
       "name":"Teste",
       "email":"teste@gmail.com",
       "password":"teste"
-    }
-    )
+    })
     await fakeUserRepository.save({
       'id': 'jhfalkjhdl',
       "name":"Teste 2",
       "email":"teste2@gmail.com",
       "password":"teste2"
-    }
-    )
+    })
 
     await removeUserUseCase.execute('jhfalkjhdl')
 

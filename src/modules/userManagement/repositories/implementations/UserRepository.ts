@@ -1,12 +1,23 @@
 import { getRepository } from 'typeorm';
+import { Module } from '../../../marketPlace/entities/Modules';
 import { User } from '../../entities/User';
 import { IUsersRepository } from '../IUsersRepository';
 
 export class UserRepository implements IUsersRepository {
+  
+  async getModules(id: string): Promise<Module[]> {
+    const user = await getRepository(User).findOne({
+      where: {
+        id,
+      },
+      relations: ['modules']
+    })
+    return user?.modules || [] as Module[];
+  }
+
   async findById(id: string): Promise<User | null> {
     const user = await getRepository(User).findOne({
       where: { id },
-      select:['id','name', 'email', 'status', 'forgot_code', 'created_at', 'updated_at', 'status', 'org_id', 'organization']
     });
     return user || null;
   }
@@ -23,17 +34,15 @@ export class UserRepository implements IUsersRepository {
     await getRepository(User).save(user);
   }
 
-  async findByEmail(email: string): Promise<User | null> {
+  async findByEmail(email: string, withPassword?: boolean): Promise<User | null> {
     const user = await getRepository(User).findOne({
       where: { email },
-      select:['id','name', 'email', 'status', 'forgot_code', 'created_at', 'updated_at', 'status', 'org_id', 'organization']
     });
     return user || null;
   }
 
   async all(): Promise<User[]> {
     const users = await getRepository(User).find({
-      select:['id','name', 'email', 'status', 'forgot_code', 'created_at', 'updated_at', 'status', 'org_id', 'organization']
     });
     return users;
   }

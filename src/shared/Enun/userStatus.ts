@@ -2,5 +2,6 @@
 export enum UserStatus {
   INATIVO = 'INATIVO',
   ATIVO = 'ATIVO',
-  AGUARDANDO = 'AGUARDANDO'
+  AGUARDANDO = 'AGUARDANDO',
+  PENDENTE = 'PENDENTE'
 } 
